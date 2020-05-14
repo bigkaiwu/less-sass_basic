@@ -1,0 +1,45 @@
+//注释
+// 单行注释，不会被编译
+/*
+    多行注释，会被编译
+*/
+//变量$
+$number : 100px;
+.box{
+    width: $number;
+    height: $number;
+}
+//插值 $key #{$key}
+$margin : margin;
+$index : 2;
+.box#{$index}{
+    #{$margin} : 0 auto;
+}
+//作用域 同js 就近原则 有顺序
+.box2{
+    height: $number;//100px less200px
+    $number : 200px;
+    width: $number;//200px
+}
+//选择器嵌套
+ul{
+    list-style: none;
+    li{
+        float: left;
+        p{
+            margin: 10px;
+            span{margin: 10px;}
+        }
+        a{
+            text-decoration: none;
+        }
+    }
+    &:hover{ //伪类 &
+        color: red;
+        font: {
+            size: 14x;
+            family: 宋体;
+            weight: bold;
+        }
+    }
+}
