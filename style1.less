@@ -41,6 +41,90 @@ ul{
         //    size: 14x;
         //   family: 宋体;
         //    weight: bold;
-        }
-    }// 
+        //}
+    }
 }
+//计算
+@num : 100px;
+.box3{
+    width: @num * 2;
+    height: @num + 10em; //110px 相加时单位不同，会以第一个数的单位为准进行转化
+    margin: 10em + @num; //110em
+    padding: 20px / 1.5; //13.33333333px;
+    padding: ~"20px / 1.5"; //20px / 1.5 转义
+    color: #111111 * 2; //支持颜色运算#222222;
+}
+//函数
+.box4{
+    width: round(3.5px);//4px
+    height: percentage(0.2);//20%
+    margin: random();//random() 无法生成随机数
+    padding: sqrt(25);
+}
+//混入
+.show{
+    display: block;
+}
+.hidden(@color){
+    display: none;
+    color: @color;
+}
+.box5{
+    width: 100px;
+    .show;//混入show并渲染
+    .hidden(blue);//只混入 .hidden不会被渲染 ()内可以传参
+}
+//命名空间
+#nm(){
+    .show{display: inline-block;}
+}
+.box6{
+    .show; //display: block;
+    #nm.show; //display: inline-block;
+}
+//继承
+.line{
+    display: inline;
+}
+.box7{
+    &:extend(.line);
+}
+.box8{
+    &:extend(.line);
+}
+//.line,
+//.box7,
+//.box8 {
+//  display: inline;
+//}
+
+//合并
+.box9{
+    background+: url(1.png);
+    background+: url(2.png);
+    //transform+: scale(2);
+    //transform+: rotate(30deg);  transform: scale(2), rotate(30deg)
+    transform+_: scale(2);
+    transform+_: rotate(30deg);//transform: scale(2) rotate(30deg);
+}
+//媒体查询
+.box10{
+    width: 100px;
+    @media all and (min-width :768px ) {
+        width: 600px;
+    }
+    @media all and (min-width : 1440px) {
+        width: 980px;
+    }
+}
+//条件
+@count : 5;
+.get(@cn) when (@cn > 4 ){
+    width : 100px + @cn;
+}
+.box11{
+    .get(@count)
+}
+
+
+
