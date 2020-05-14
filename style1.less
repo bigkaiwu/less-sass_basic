@@ -1,0 +1,46 @@
+//注释
+// 单行注释，不会被编译
+/*
+    多行注释，会被编译
+*/
+//变量 @
+@number : 100px;
+.box{
+    width: @number; //100px
+    height: @number; //100px
+}
+//插值 @key @{key}
+@margin : margin;
+@index : 2;
+.box@{index}{
+    @{margin} : 0 auto;
+}
+//作用域 同js 就近原则 无顺序
+.box2{
+    height: @number; //200px sass100px
+    @number : 200px;
+    width: @number; //200px
+}
+//选择器嵌套 
+ul{
+    list-style: none;
+    li{
+        float: left;
+        p{
+            margin: 10px;
+            span{margin: 10px;}
+        }
+        a{
+            text-decoration: none;
+        }
+    }
+    &:hover{ //伪类 &
+        color: red;
+        //less没有属性嵌套的写法 sass yes
+        //font: { 
+        //    size: 14x;
+        //   family: 宋体;
+        //    weight: bold;
+        }
+    }// 
+}
